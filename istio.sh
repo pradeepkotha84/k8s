@@ -29,6 +29,9 @@ openssl x509 -req -sha256 -days 365 -CA example.com.crt -CAkey example.com.key -
 
 kubectl create -n api-1 secret tls httpbin-credential --key=httpbin.example.com.key --cert=httpbin.example.com.crt
 
+curl -v -k  -H "Host: httpbin.example.com"  http://20.241.217.148/get
+curl -v -k  -H "Host: httpbin.example.com" --cacert example.com.crt --resolve "httpbin.example.com:443:20.241.217.148"  https://httpbin.example.com:443/get
+
 
 
  
