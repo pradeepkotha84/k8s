@@ -27,7 +27,7 @@ openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj '/O=example In
 openssl req -out httpbin.example.com.csr -newkey rsa:2048 -nodes -keyout httpbin.example.com.key -subj "/CN=httpbin.example.com/O=httpbin organization"
 openssl x509 -req -sha256 -days 365 -CA example.com.crt -CAkey example.com.key -set_serial 0 -in httpbin.example.com.csr -out httpbin.example.com.crt
 
-kubectl create -n api-1 secret tls httpbin-credential --key=httpbin.example.com.key --cert=httpbin.example.com.crt
+kubectl create -n istio-ingress secret tls httpbin-credential --key=httpbin.example.com.key --cert=httpbin.example.com.crt
 
 curl -v -k  -H "Host: httpbin.example.com"  http://20.241.217.148/get
 curl -v -k  -H "Host: httpbin.example.com" --cacert example.com.crt --resolve "httpbin.example.com:443:20.241.217.148"  https://httpbin.example.com:443/get
